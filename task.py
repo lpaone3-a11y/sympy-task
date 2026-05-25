@@ -23,6 +23,25 @@ def calcola_derivata(espressione: str, variabile: str) -> sympy.Expr:
 
 def calcola_integrale_definito(espressione: str, variabile: str, estremo_inf: float, estremo_sup: float) -> sympy.Expr:
     """Sub-task 2: Calcolare un Integrale Definito."""
+    try:
+        # Variabile simbolica
+        var = sympy.Symbol(variabile)
+
+        # Parsing espressione
+        expr = sympy.sympify(espressione)
+
+        # Conversione degli estremi in oggetti SymPy
+        a = sympy.sympify(estremo_inf)
+        b = sympy.sympify(estremo_sup)
+
+        # Calcolo dell'integrale definito
+        risultato = sympy.integrate(expr, (var, a, b))
+
+        return risultato
+
+    except Exception as e:
+            raise ValueError(f"Errore nel calcolo dell'integrale: {e}")
+
     pass
 
 def calcola_limite(espressione: str, variabile: str, punto: str) -> sympy.Expr:

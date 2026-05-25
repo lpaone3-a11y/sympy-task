@@ -5,6 +5,20 @@ from typing import Dict
 
 def calcola_derivata(espressione: str, variabile: str) -> sympy.Expr:
     """Sub-task 1: Calcolare una Derivata."""
+    try:
+        # Crea il simbolo
+        var = sympy.Symbol(variabile)
+
+        # Converte la stringa in espressione simbolica
+        expr = sympy.sympify(espressione)
+
+        # Calcola la derivata
+        derivata = sympy.diff(expr, var)
+
+        return derivata
+
+    except Exception as e:
+            raise ValueError(f"Errore nel calcolo della derivata: {e}")
     pass
 
 def calcola_integrale_definito(espressione: str, variabile: str, estremo_inf: float, estremo_sup: float) -> sympy.Expr:

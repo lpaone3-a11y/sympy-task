@@ -65,6 +65,24 @@ def calcola_limite(espressione: str, variabile: str, punto: str) -> sympy.Expr:
 
 def calcola_polinomio_taylor(espressione: str, variabile: str, punto: float, ordine: int) -> sympy.Expr:
     """Sub-task 4: Calcolare una Serie di Taylor."""
+    try:
+        # Variabile simbolica
+        var = sympy.Symbol(variabile)
+
+        # Parsing espressione e punto
+        expr = sympy.sympify(espressione)
+        pt = sympy.sympify(punto)
+
+        # Serie di Taylor (include O-grande)
+        serie = sympy.series(expr, var, pt, ordine + 1)
+
+        # Rimuove il termine O(...)
+        polinomio = serie.removeO()
+
+        return polinomio
+
+    except Exception as e:
+            raise ValueError(f"Errore nel calcolo del polinomio di Taylor: {e}")
     pass
 
 def risolvi_sistema_lineare(eq1: str, eq2: str, var1: str, var2: str) -> Dict[sympy.Symbol, sympy.Expr]:

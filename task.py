@@ -87,6 +87,27 @@ def calcola_polinomio_taylor(espressione: str, variabile: str, punto: float, ord
 
 def risolvi_sistema_lineare(eq1: str, eq2: str, var1: str, var2: str) -> Dict[sympy.Symbol, sympy.Expr]:
     """Sub-task 5: Risolvere un Sistema Lineare."""
+    try:
+        # Definizione delle variabili simboliche
+        x = sympy.Symbol(var1)
+        y = sympy.Symbol(var2)
+
+        # Parsing delle equazioni (uguali a zero)
+        expr1 = sympy.sympify(eq1)
+        expr2 = sympy.sympify(eq2)
+
+        # Risoluzione del sistema
+        soluzione = sympy.solve((expr1, expr2), (x, y), dict=True)
+
+        # sympy.solve restituisce una lista di soluzioni
+        if not soluzione:
+          return {}
+
+        return soluzione[0]
+
+    except Exception as e:
+            raise ValueError(f"Errore nella risoluzione del sistema: {e}")
+
     pass
 
 def main():
